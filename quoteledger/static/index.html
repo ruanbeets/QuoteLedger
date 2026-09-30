@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QuoteLedger · Packaging procurement</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">QL</span><span>QuoteLedger<small>PACKAGING PROCUREMENT</small></span></div>
+      <div class="nav-label">WORKSPACE</div>
+      <button class="nav-item active" id="nav-requests"><span>▦</span> Quote comparisons</button>
+      <div class="sidebar-bottom"><span class="status-dot"></span> Local prototype <small>Saved on this computer</small></div>
+    </aside>
+    <main class="main">
+      <header class="topbar"><div class="breadcrumb">Workspace <span>/</span> <strong>Quote comparisons</strong></div><div class="top-note">Corrugated packaging · ZAR basis</div></header>
+      <div class="page">
+        <div class="heading-row"><div><div class="eyebrow">PROCUREMENT WORKSPACE</div><h1>Compare supplier quotes with confidence.</h1><p class="subtitle">One consistent view of price, quantity, delivery and commercial terms.</p></div><button class="button primary" id="new-request">+ New request</button></div>
+        <div class="banner"><div class="banner-icon">◎</div><div><strong>Every number has a source.</strong><span>Review extracted details against the original quote before making a decision.</span></div><button class="text-button" id="how-it-works">How it works ↗</button></div>
+        <div class="workspace-grid"><section class="request-list"><div class="section-heading"><div><span class="eyebrow">YOUR REQUESTS</span><h2>Purchase requests</h2></div><span id="request-count" class="count">0</span></div><div id="requests"></div></section>
+          <section class="detail" id="detail"><div class="empty-state">Select a request to view its comparison.</div></section></div>
+        <footer>QuoteLedger prototype · For decision support; buyer review required before purchase.</footer>
+      </div>
+    </main>
+  </div>
+
+  <dialog id="request-dialog"><form id="request-form"><div class="dialog-head"><div><span class="eyebrow">NEW PURCHASE REQUEST</span><h2>What are you buying?</h2></div><button type="button" class="icon-button close-dialog" aria-label="Close">×</button></div><label>Request name<input name="name" required placeholder="e.g. Q4 mailer box replenishment"></label><label>Boxes required<input name="quantity" type="number" min="1" max="10000000" required placeholder="1000"></label><label>Specification<textarea name="specification" rows="3" placeholder="Dimensions, board grade, delivery location…"></textarea></label><p class="form-error" id="request-error"></p><div class="dialog-actions"><button type="button" class="button secondary close-dialog">Cancel</button><button class="button primary">Create request</button></div></form></dialog>
+
+  <dialog id="quote-dialog"><form id="quote-form"><div class="dialog-head"><div><span class="eyebrow">ADD SUPPLIER QUOTE</span><h2>Bring a quote into the comparison</h2></div><button type="button" class="icon-button close-dialog" aria-label="Close">×</button></div><div class="upload-zone"><input id="quote-file" type="file" accept=".pdf,.txt,application/pdf,text/plain"><strong>Choose a PDF or TXT quote</strong><small>Text based PDFs only · 7 MB max</small></div><div class="or">OR PASTE QUOTE TEXT</div><label><textarea id="quote-text" rows="8" placeholder="Supplier: Boxline Packaging&#10;Price per box: R 12.40&#10;MOQ: 500&#10;Lead time: 7 days…"></textarea></label><p class="form-error" id="quote-error"></p><div class="dialog-actions"><button type="button" class="button secondary close-dialog">Cancel</button><button class="button primary">Extract quote details</button></div></form></dialog>
+
+  <dialog id="review-dialog" class="wide"><form id="review-form"><div class="dialog-head"><div><span class="eyebrow">SOURCE REVIEW</span><h2 id="review-title">Review quote</h2><p class="muted">Check each suggested field against the supplier source. Your edits are saved.</p></div><button type="button" class="icon-button close-dialog" aria-label="Close">×</button></div><div class="review-layout"><div class="field-grid" id="review-fields"></div><div class="source-panel"><div class="source-title">ORIGINAL QUOTE <a id="pdf-link" target="_blank" rel="noopener" hidden>Open PDF ↗</a></div><pre id="source-text"></pre><div id="evidence-box" class="evidence-box"></div></div></div><p class="form-error" id="review-error"></p><div class="dialog-actions"><button type="button" class="button secondary close-dialog">Cancel</button><button type="submit" data-status="needs_review" class="button secondary">Save draft</button><button type="submit" data-status="reviewed" class="button primary">Mark reviewed</button></div></form></dialog>
+  <dialog id="help-dialog"><div class="dialog-head"><div><span class="eyebrow">HOW IT WORKS</span><h2>A comparison you can trace</h2></div><button type="button" class="icon-button close-dialog" aria-label="Close">×</button></div><ol class="help-list"><li>Add a PDF or paste quote text. Common packaging terms are suggested.</li><li>Open each quote, inspect the original text and correct any field.</li><li>Confirm transport and enter a sourced ZAR exchange rate for foreign currency.</li><li>Mark reviewed. The lowest complete, reviewed landed cost is highlighted.</li></ol><p class="muted">Landed total = normalized box price × max(requested quantity, MOQ) + transport. Foreign currency amounts are converted using the rate you enter. VAT and tooling are excluded unless included in the quoted price; note them as exceptions.</p></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="/app.js" defer></script>
+</body>
+</html>

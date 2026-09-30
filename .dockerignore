@@ -1,0 +1,10 @@
+.git
+.agents
+.aws
+.codex
+.venv
+instance
+legacy
+tests
+__pycache__
+*.pyc

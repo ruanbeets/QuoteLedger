@@ -1,0 +1,1 @@
+"""QuoteLedger procurement comparison prototype."""
